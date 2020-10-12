@@ -13,7 +13,7 @@ int main(int argc, char const *argv[]) {
         file << aeropuerto;
     }
 
-    ISAM<Aeropuerto, char(Aeropuerto::*)[5], string, 3> isam("data", &Aeropuerto::id);
+    ISAM<Aeropuerto, char(Aeropuerto::*)[6], string, 3> isam("data", &Aeropuerto::id);
      
     return 0;
 }

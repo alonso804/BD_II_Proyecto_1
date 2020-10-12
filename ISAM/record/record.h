@@ -5,7 +5,7 @@
 #include"./next.h"
 
 struct Aeropuerto {
-    char id [5];
+    char id [6];
     char nombre [50];
     char ciudad [50];
     char pais [50];
@@ -77,7 +77,7 @@ void Aeropuerto::print() {
      */
 }
 
-inline ostream& operator << (ostream& stream, const Aeropuerto& record) {
+ostream& operator << (ostream& stream, const Aeropuerto& record) {
     stream.write((char*)&record, sizeof(Aeropuerto));
     stream << '\n';
     stream << flush;
@@ -85,7 +85,7 @@ inline ostream& operator << (ostream& stream, const Aeropuerto& record) {
     return stream;
 }
 
-inline istream& operator >> (istream& stream, const Aeropuerto& record) {
+istream& operator >> (istream& stream, const Aeropuerto& record) {
     stream.read((char*)&record, sizeof(Aeropuerto));
     stream.get();
 

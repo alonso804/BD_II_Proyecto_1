@@ -25,4 +25,3 @@ Next& Next::operator = (const Next& record) {
 }
 
 #endif //Next_H
-
