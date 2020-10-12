@@ -2,7 +2,7 @@
 #define Next_H
 
 struct Next {
-    long int next_num;
+    long int position;
     char file;
 
     Next();

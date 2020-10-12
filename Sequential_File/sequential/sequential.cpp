@@ -22,31 +22,31 @@ void SequentialFile<ObjType, MembType>::joinFiles() {
 
     Next temp = current.next;
 
-    current.next.next_num = next_record;
+    current.next.position = next_record;
     current.next.file = 'd';
     temp_file << current;
 
-    while(temp.next_num != -1) {
+    while(temp.position != -1) {
         ++next_record;
         if(temp.file == 'd') {
-            file.seekg(temp.next_num * (sizeof(ObjType) + 1));
+            file.seekg(temp.position * (sizeof(ObjType) + 1));
             file >> current;
         } else {
-            aux_file.seekg(temp.next_num * (sizeof(ObjType) + 1));
+            aux_file.seekg(temp.position * (sizeof(ObjType) + 1));
             aux_file >> current;
         }
 
-        temp.next_num = current.next.next_num;
+        temp.position = current.next.position;
         temp.file = current.next.file;
 
-        current.next.next_num = next_record;
+        current.next.position = next_record;
         current.next.file = 'd';
 
         temp_file << current;
     }
 
     temp_file.seekg(temp_file.tellg() - (sizeof(ObjType) + 1));
-    current.next.next_num = -1;
+    current.next.position = -1;
     temp_file << current;
 
     file.close();
@@ -73,10 +73,10 @@ void SequentialFile<ObjType, MembType>::insertAll(vector<ObjType> records) {
         long int next_record = 1;
 
         for(auto it = begin(records); it != end(records); ++it) {
-            (*it).next.next_num = next_record;
+            (*it).next.position = next_record;
 
             if(it == end(records) - 1) {
-                (*it).next.next_num = -1;
+                (*it).next.position = -1;
             }
 
             file << (*it);
@@ -181,12 +181,12 @@ vector<ObjType> SequentialFile<ObjType, MembType>::search(const string& begin, c
 
         records.push_back(result);
 
-        while(result.next.next_num != -1 && result.*primary_key != end) {
+        while(result.next.position != -1 && result.*primary_key != end) {
             if(result.next.file == 'd') {
-                file.seekg(result.next.next_num * (sizeof(ObjType) + 1));
+                file.seekg(result.next.position * (sizeof(ObjType) + 1));
                 file >> result;
             } else {
-                aux_file.seekg(result.next.next_num * (sizeof(ObjType) + 1));
+                aux_file.seekg(result.next.position * (sizeof(ObjType) + 1));
                 aux_file >> result;
             }
 
@@ -238,7 +238,7 @@ void SequentialFile<ObjType, MembType>::add(ObjType registro) {
                     next_current = current.next; 
 
                     aux_file.seekg(0, ios::end);
-                    current.next.next_num = (aux_file.tellg() / (sizeof(ObjType) + 1));
+                    current.next.position = (aux_file.tellg() / (sizeof(ObjType) + 1));
                     current.next.file = 'a';
                     
                     aux_file.seekg(aux_position * (sizeof(ObjType) + 1));
@@ -247,7 +247,7 @@ void SequentialFile<ObjType, MembType>::add(ObjType registro) {
                     next_current = current.next; 
 
                     aux_file.seekg(0, ios::end);
-                    current.next.next_num = aux_file.tellg() / (sizeof(ObjType) + 1);
+                    current.next.position = aux_file.tellg() / (sizeof(ObjType) + 1);
                     current.next.file = 'a';
 
                     file.seekg(position * (sizeof(ObjType) + 1));

@@ -15,7 +15,7 @@ void Registro::print() {
     cout << "Nombre: " << nombre << endl;
     cout << "Carrera: " << carrera << endl;
     cout << "Ciclo: " << ciclo << endl;
-    cout << "Next: (" << next.next_num << ", " << next.file << ")" << endl;
+    cout << "Next: (" << next.position << ", " << next.file << ")" << endl;
 }
 
 ostream& operator << (ostream& stream, const Registro& record) {

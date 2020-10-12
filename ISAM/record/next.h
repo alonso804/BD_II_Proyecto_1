@@ -1,4 +1,16 @@
-#include"./next.h"
+#ifndef Next_H
+#define Next_H
+
+#include"../header.h"
+
+struct Next {
+    size_t position;
+    char file;
+
+    Next();
+
+    Next& operator = (const Next&);
+};
 
 Next::Next() {
     this->position = 0;
@@ -11,3 +23,6 @@ Next& Next::operator = (const Next& record) {
 
     return *this;
 }
+
+#endif //Next_H
+

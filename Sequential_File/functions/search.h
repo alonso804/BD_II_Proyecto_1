@@ -42,8 +42,8 @@ template <typename ObjType, typename MembType, typename T>
 long unsigned int linearSearch(fstream& file, MembType memb, const T& key, ObjType& obj, bool& find) {
     long unsigned int position;
 
-    while(obj.next.next_num != -1 && obj.next.file != 'd' && obj.*memb != key) {
-        file.seekg(obj.next.next_num * (sizeof(ObjType) + 1));
+    while(obj.next.position != -1 && obj.next.file != 'd' && obj.*memb != key) {
+        file.seekg(obj.next.position * (sizeof(ObjType) + 1));
         position = file.tellg() / (sizeof(ObjType) + 1);
         file.read((char*) &obj, sizeof(ObjType));
     }
