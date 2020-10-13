@@ -1,5 +1,10 @@
-run: sequential
-	./sequential
+run: sequential_file
+	./sequential_file
 
-sequential: main.cpp registro/next.cpp registro/registro.cpp sequential/sequential.cpp
-	g++ -o sequential main.cpp registro/next.cpp registro/registro.cpp sequential/sequential.cpp -std=c++17 -lstdc++fs
+sequential_file: *.cpp
+	g++ -o sequential_file *.cpp -std=c++17 -lstdc++fs
+
+clean: 
+	rm *.dat sequential_file
+
+
