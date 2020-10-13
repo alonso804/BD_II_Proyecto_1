@@ -9,11 +9,11 @@ struct Aeropuerto {
     char nombre [50];
     char ciudad [50];
     char pais [50];
-    char IATA [3];
-    char ICAO [4];
-    char latitud [8];
-    char longitud[8];
-    char altitud[8];
+    char IATA [4];
+    char ICAO [5];
+    char latitud [25];
+    char longitud[25];
+    char altitud[25];
     char Timezone [50];
     char DST [50];
     char TZ_database [50];
@@ -44,7 +44,7 @@ Aeropuerto::Aeropuerto(string id, string nombre, string ciudad, string pais, str
     strncpy (this->DST, DST.c_str(), sizeof(this->DST));
     strncpy (this->TZ_database, TZ_database.c_str(), sizeof(this->TZ_database));
     strncpy (this->tipo, tipo.c_str(), sizeof(this->tipo));
-    next.position = 0;
+    next.position = -1;
     next.file = 'd';
 }
 
@@ -68,17 +68,30 @@ Aeropuerto& Aeropuerto::operator = (const Aeropuerto& record) {
 }
 
 void Aeropuerto::print() {
-    /*
-     *cout << "Codigo: " << id << endl;
-     *cout << "Nombre: " << nombre << endl;
-     *cout << "Carrera: " << ciudad << endl;
-     *cout << "Ciclo: " << cycle << endl;
-     *cout << "Next: (" << next.position << ", " << next.file << ")" << endl;
-     */
+    cout << "Id: " << id << endl;
+    cout << "Nombre: " << nombre << endl;
+    cout << "Ciudad: " << ciudad << endl;
+    cout << "Next: (" << next.position << ", " << next.file << ")" << endl;
 }
 
 ostream& operator << (ostream& stream, const Aeropuerto& record) {
-    stream.write((char*)&record, sizeof(Aeropuerto));
+    stream.write((char*)&record, sizeof(record));
+    /*
+     *stream.write((char*)&record.id, sizeof(record.id));
+     *stream.write((char*)&record.nombre, sizeof(record.nombre));
+     *stream.write((char*)&record.ciudad, sizeof(record.ciudad));
+     *stream.write((char*)&record.pais, sizeof(record.id));
+     *stream.write((char*)&record.IATA, sizeof(record.IATA));
+     *stream.write((char*)&record.ICAO, sizeof(record.ICAO));
+     *stream.write((char*)&record.latitud, sizeof(record.latitud));
+     *stream.write((char*)&record.longitud, sizeof(record.longitud));
+     *stream.write((char*)&record.altitud, sizeof(record.altitud));
+     *stream.write((char*)&record.Timezone, sizeof(record.Timezone));
+     *stream.write((char*)&record.DST, sizeof(record.DST));
+     *stream.write((char*)&record.TZ_database, sizeof(record.TZ_database));
+     *stream.write((char*)&record.next.position, sizeof(record.next.position));
+     *stream.write((char*)&record.next.file, sizeof(record.next.file));
+     */
     stream << '\n';
     stream << flush;
 
@@ -86,7 +99,23 @@ ostream& operator << (ostream& stream, const Aeropuerto& record) {
 }
 
 istream& operator >> (istream& stream, const Aeropuerto& record) {
-    stream.read((char*)&record, sizeof(Aeropuerto));
+    stream.read((char*)&record, sizeof(record));
+    /*
+     *stream.read((char*)&record.id, sizeof(record.id));
+     *stream.read((char*)&record.nombre, sizeof(record.nombre));
+     *stream.read((char*)&record.ciudad, sizeof(record.ciudad));
+     *stream.read((char*)&record.pais, sizeof(record.id));
+     *stream.read((char*)&record.IATA, sizeof(record.IATA));
+     *stream.read((char*)&record.ICAO, sizeof(record.ICAO));
+     *stream.read((char*)&record.latitud, sizeof(record.latitud));
+     *stream.read((char*)&record.longitud, sizeof(record.longitud));
+     *stream.read((char*)&record.altitud, sizeof(record.altitud));
+     *stream.read((char*)&record.Timezone, sizeof(record.Timezone));
+     *stream.read((char*)&record.DST, sizeof(record.DST));
+     *stream.read((char*)&record.TZ_database, sizeof(record.TZ_database));
+     *stream.read((char*)&record.next.position, sizeof(record.next.position));
+     *stream.read((char*)&record.next.file, sizeof(record.next.file));
+     */
     stream.get();
 
     return stream;

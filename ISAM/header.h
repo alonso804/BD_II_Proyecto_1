@@ -19,6 +19,7 @@
 
 #define ROOT_PAGES 1
 #define MAX_LEAF_ENTRIES 7
+#define MAX_LEAF_PAGES 1000
 
 using namespace std;
 

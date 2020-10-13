@@ -4,7 +4,7 @@
 #include"../header.h"
 
 struct Next {
-    size_t position;
+    long int position;
     char file;
 
     Next();
