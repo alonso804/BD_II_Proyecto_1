@@ -33,14 +33,31 @@ int main(int argc, char const *argv[]) {
  *    }
  */
 
+    Aeropuerto temp_1 ("118","Peace River Airport","Moncton","Canada","YQM","CYQM","46.11220169067383","-64.67859649658203","232","-4","A","America/Halifax","airport");
+    isam.add(temp_1);
+
     result = isam.search("118");
+    result.print();
+    result = isam.search("119");
+    result.print();
 
 
-//118,Peace River Airport,Moncton,Canada,YQM,CYQM,46.11220169067383,-64.67859649658203,232,-4,A,America/Halifax,airport
 
-//223,Touat Cheikh Sidi Mohamed Belkebir Airport,Adrar,Algeria,AZR,DAUA,27.837600708007812,-0.18641400337219238,919,1,N,Africa/Algiers,airport
+    Aeropuerto temp_2 ("223","Touat Cheikh Sidi Mohamed Belkebir Airport","Adrar","Algeria","AZR","DAUA","27.837600708007812","-0.18641400337219238","919","1","N","Africa/Algiers","airport");
+    isam.add(temp_2);
 
-//321,Flugplatz Bautzen,Bautzen,Germany,\N,EDAB,51.193611,14.519722,568,1,E,Europe/Berlin,airport
+    result = isam.search("223");
+    result.print();
+    result = isam.search("224");
+    result.print();
+
+    Aeropuerto temp_3 ("321","Flugplatz Bautzen","Bautzen","Germany","null","EDAB","51.193611","14.519722","568","1","E","Europe/Berlin","airport");
+    isam.add(temp_3);
+
+    result = isam.search("321");
+    result.print();
+    result = isam.search("322");
+    result.print();
     return 0;
 }
 

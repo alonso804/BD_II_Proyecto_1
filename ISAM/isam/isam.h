@@ -60,22 +60,12 @@ ISAM<ObjType, MembType, T, IndexAmount>::~ISAM() {
     fstream aux_file;
     aux_file.open(this->name_aux, ios::in | ios::out | ios::binary);
 
-    if(!file.is_open()) {
-        cerr << RED << "Can't open " << this->name_file << RESET << endl;
-        throw new exception;
-    }
-
-    if(!aux_file.is_open()) {
-        cerr << RED << "Can't open " << this->name_aux << RESET << endl;
-        throw new exception;
-    }
-
     vector<ObjType> all;
     ObjType record;
     file >> record;
     all.push_back(record);
 
-    while(record.next.position >= (long int)-1) {
+    while(record.next.position != (long int)-1) {
         if(record.next.file == 'd') {
             file.seekg(record.next.position * (sizeof(ObjType) + 1));
             file >> record;
@@ -91,11 +81,6 @@ ISAM<ObjType, MembType, T, IndexAmount>::~ISAM() {
     aux_file.close();
 
     file.open(this->name_file, ios::in | ios::out | ios::binary);
-
-    if(!file.is_open()) {
-        cerr << RED << "Can't open " << this->name_file << RESET << endl;
-        throw new exception;
-    }
 
     for(auto r : all) {
         file << r;
@@ -398,8 +383,14 @@ void ISAM<ObjType, MembType, T, IndexAmount>::add(ObjType record) {
         file >> temp;
         aux_file.seekg(0, ios::end);
         long int temp_position = aux_file.tellg() / (sizeof(ObjType) + 1);
-        record.next.position = temp.next.position;
+
+        record.next = temp.next;
         temp.next.position = temp_position;
+        temp.next.file = 'a';
+
+        swap(record, temp);
+        swap(record.next, temp.next);
+
         aux_file << record;
         file.seekg(position * (sizeof(ObjType) + 1));
         file << temp;
@@ -408,8 +399,14 @@ void ISAM<ObjType, MembType, T, IndexAmount>::add(ObjType record) {
         aux_file >> temp;
         aux_file.seekg(0, ios::end);
         long int temp_position = aux_file.tellg() / (sizeof(ObjType) + 1);
-        record.next.position = temp.next.position;
+
+        record.next = temp.next;
         temp.next.position = temp_position;
+        temp.next.file = 'a';
+
+        swap(record, temp);
+        swap(record.next, temp.next);
+
         aux_file << record;
         aux_file.seekg(position * (sizeof(ObjType) + 1));
         aux_file << temp;
