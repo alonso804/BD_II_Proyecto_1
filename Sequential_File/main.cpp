@@ -1,163 +1,62 @@
 #include"./sequential/sequential.h"
+#include"./csv/reader.h"
 
-template <typename T>
-void searchTest(T&);
-
-template <typename T>
-void addTest(T&);
-
-template <typename T>
-void addTest2(T&);
-
-template <typename T>
-void joinFileTest(T&);
 
 int main(int argc, char const *argv[]) {
-    Registro registro1{"0001", "Alonso", "CS", 2};
-    Registro registro2{"0003", "Lucero", "Ing Civil", 3};
-    Registro registro3{"0004", "Noemi", "Turismo", 1};
-    Registro registro4{"0002", "Diana", "Bioingenieria", 8};
-    Registro registro5{"0111", "Alejandro", "Arquitectura", 3};
-    Registro registro6{"0222", "Violeta", "CS", 2};
+    ofstream file("data.dat", ios::binary);
+    if(!file.is_open()) {
+        cerr << "Error" << endl;
+    }
+    auto data = read_record(); 
+    vector<Aeropuerto> all;
 
-    vector<Registro> records;
-    records.push_back(registro1);
-    records.push_back(registro2);
-    records.push_back(registro3);
-    records.push_back(registro4);
-    records.push_back(registro5);
-    records.push_back(registro6);
+    for(auto rows : data) {
+        Aeropuerto aeropuerto (rows[0], rows[1],rows[2],rows[3],rows[4],rows[5], rows[6], rows[7], rows[8],rows[9],rows[10],rows[11], rows[12]);
 
-    SequentialFile<Registro, char (Registro::*)[20]> test1("test1", &Registro::nombre);
-
-    test1.insertAll(records);
-
-    /*
-     *cout << "=========================================\n";
-     *cout << "SEARCH TEST 1\n";
-     *cout << "=========================================\n";
-     *searchTest(test1);
-     */
-
-    cout << "=========================================\n";
-    cout << "ADD TEST 1\n";
-    cout << "=========================================\n";
-    addTest(test1);
-
-    cout << "=========================================\n";
-    cout << "JOIN TEST 1\n";
-    cout << "=========================================\n";
-    joinFileTest(test1);
-
-    auto records_join = test1.search("Alejandro", "Violeta");
-    for(auto& r : records_join) {
-        r.print();
-        cout << "-------------------------------------------\n";
+        all.push_back(aeropuerto);
     }
 
-    cout << "=========================================\n";
-    cout << "ADD TEST 2\n";
-    cout << "=========================================\n";
-    addTest2(test1);
+    file.close();
 
-    test1.search("Rogelio").print();
-    cout << "-------------------------------------------\n";
-    test1.search("Sofia").print();
+    SequentialFile<Aeropuerto, char(Aeropuerto::*)[6]> sequential("data", &Aeropuerto::id);
+    sequential.insertAll(all);
+    Aeropuerto result;
 
-    /*
-     *cout << "=========================================\n";
-     *cout << "SEARCH TEST 2\n";
-     *cout << "=========================================\n";
-     *searchTest(test1);
-     */
-
-
-    cout << "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<\n";
-    auto records_join2 = test1.search("Alejandro", "Zupe");
-    for(auto& r : records_join2) {
-        r.print();
-        cout << "-------------------------------------------\n";
+    cout << "TEST 1\n";
+    for(auto i : data) {
+        result = sequential.search(i[0]);
     }
+
+    cout << "TEST 2\n";
+    auto result_1 = sequential.search(data[0][0], data[6450][0]);
+
+    for(auto i : result_1) {
+        i.print();
+    }
+
+    Aeropuerto temp_1 ("118","Peace River Airport","Moncton","Canada","YQM","CYQM","46.11220169067383","-64.67859649658203","232","-4","A","America/Halifax","airport");
+    sequential.add(temp_1);
+
+    result = sequential.search("118");
+    result.print();
+    result = sequential.search("119");
+    result.print();
+
+    Aeropuerto temp_2 ("223","Touat Cheikh Sidi Mohamed Belkebir Airport","Adrar","Algeria","AZR","DAUA","27.837600708007812","-0.18641400337219238","919","1","N","Africa/Algiers","airport");
+    sequential.add(temp_2);
+
+    result = sequential.search("223");
+    result.print();
+    result = sequential.search("224");
+    result.print();
+
+    Aeropuerto temp_3 ("321","Flugplatz Bautzen","Bautzen","Germany","null","EDAB","51.193611","14.519722","568","1","E","Europe/Berlin","airport");
+    sequential.add(temp_3);
+
+    result = sequential.search("321");
+    result.print();
+    result = sequential.search("322");
+    result.print();
 
     return 0;
-}
-
-template <typename T>
-void searchTest(T& test) {
-    Registro record;
-    record = test.search("Alonso");
-    record.print();
-    cout << "---------------------------------\n";
-    record = test.search("Noemi");
-    record.print();
-    cout << "---------------------------------\n";
-    record = test.search("Lucero");
-    record.print();
-    cout << "---------------------------------\n";
-    record = test.search("Diana");
-    record.print();
-    cout << "---------------------------------\n";
-    record = test.search("Alejandro");
-    record.print();
-    cout << "---------------------------------\n";
-    record = test.search("Violeta");
-    record.print();
-    cout << "---------------------------------\n";
-
-    //-Must be error
-    /*
-     *record = test.search("Beatriz");
-     *record.print();
-     */
-}
-
-template <typename T>
-void addTest(T& test) {
-    Registro searched;
-
-    Registro registro1 {"0006", "Aurelio", "Ing Sistemas", 9};
-    test.add(registro1);
-
-    Registro registro2 {"0005", "Rogelio", "Derecho", 3};
-    test.add(registro2);
-
-    Registro registro3 {"0010", "Jacky", "Derecho", 8};
-    test.add(registro3);
-
-    Registro registro4 {"0011", "Zupe", "Profesor", 7};
-    test.add(registro4);
-
-    searched = test.search("Rogelio");
-    searched.print();
-    cout << "---------------------------------\n";
-
-    searched = test.search("Jacky");
-    searched.print();
-    cout << "---------------------------------\n";
-
-    searched = test.search("Aurelio");
-    searched.print();
-    cout << "---------------------------------\n";
-
-    searched = test.search("Zupe");
-    searched.print();
-    cout << "---------------------------------\n";
-
-    //-Must be error
-    /*
-     *searched = test.search("Chris");
-     *searched.print();
-     */
-}
-
-template <typename T>
-void addTest2(T& test) {
-    Registro registro1 {"1286", "Sofia", "Modelo", 21};
-    test.add(registro1);
-}
-
-template <typename T>
-void joinFileTest(T& test) {
-    Registro registro1 {"0016", "Chris", "Deportista", 1};
-    test.add(registro1);
 }

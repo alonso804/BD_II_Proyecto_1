@@ -18,21 +18,20 @@ int main(int argc, char const *argv[]) {
     ISAM<Aeropuerto, char(Aeropuerto::*)[6], string, 3> isam("data", &Aeropuerto::id);
     Aeropuerto result;
 
+    cout << "TEST 1\n";
+    for(size_t i = 0; i < 6451; ++i) {
+        result = isam.search(data[i][0]);
+        result.print();
+    }
 
-/*
- *    cout << "TEST 1" << endl;
- *    for(size_t i = 0; i < 6451; ++i) {
- *        result = isam.search(data[i][0]);
- *        result.print();
- *    }
- *
- *    cout << "TEST 2" << endl;
- *    auto all = isam.search(data[0][0], data[6450][0]);
- *    for(auto& i : all) {
- *        i.print();
- *    }
- */
+    cout << "TEST 2\n";
+    auto result_1 = isam.search(data[0][0], data[6450][0]);
 
+    for(auto i : result_1) {
+        i.print();
+    }
+
+    cout << "TEST 3\n";
     Aeropuerto temp_1 ("118","Peace River Airport","Moncton","Canada","YQM","CYQM","46.11220169067383","-64.67859649658203","232","-4","A","America/Halifax","airport");
     isam.add(temp_1);
 
@@ -40,8 +39,6 @@ int main(int argc, char const *argv[]) {
     result.print();
     result = isam.search("119");
     result.print();
-
-
 
     Aeropuerto temp_2 ("223","Touat Cheikh Sidi Mohamed Belkebir Airport","Adrar","Algeria","AZR","DAUA","27.837600708007812","-0.18641400337219238","919","1","N","Africa/Algiers","airport");
     isam.add(temp_2);
@@ -58,6 +55,7 @@ int main(int argc, char const *argv[]) {
     result.print();
     result = isam.search("322");
     result.print();
+
     return 0;
 }
 

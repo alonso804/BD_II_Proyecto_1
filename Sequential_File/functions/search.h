@@ -2,7 +2,7 @@
 #define Binary_Search_H
 
 #include"../header.h"
-#include"../registro/registro.h"
+#include"../record/record.h"
 
 template <typename ObjType, typename MembType, typename T>
 long int binarySearch(fstream& file, const long unsigned int size, MembType memb, const T& key, bool& find) {
