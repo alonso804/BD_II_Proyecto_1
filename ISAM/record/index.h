@@ -24,7 +24,6 @@ struct Index {
 
 ostream& operator << (ostream& stream, const Index& index) {
     stream.write((char*)&index, sizeof(Index));
-    //stream.write((char*)&index, sizeof(6) + sizeof(long int));
     stream << '\n';
     stream << flush;
 
@@ -32,7 +31,6 @@ ostream& operator << (ostream& stream, const Index& index) {
 }
 
 istream& operator >> (istream& stream, const Index& index) {
-    //stream.read((char*)&index, sizeof(Index));
     stream.read((char*)&index, sizeof(Index));
     stream.get();
 

@@ -76,22 +76,6 @@ void Aeropuerto::print() {
 
 ostream& operator << (ostream& stream, const Aeropuerto& record) {
     stream.write((char*)&record, sizeof(record));
-    /*
-     *stream.write((char*)&record.id, sizeof(record.id));
-     *stream.write((char*)&record.nombre, sizeof(record.nombre));
-     *stream.write((char*)&record.ciudad, sizeof(record.ciudad));
-     *stream.write((char*)&record.pais, sizeof(record.id));
-     *stream.write((char*)&record.IATA, sizeof(record.IATA));
-     *stream.write((char*)&record.ICAO, sizeof(record.ICAO));
-     *stream.write((char*)&record.latitud, sizeof(record.latitud));
-     *stream.write((char*)&record.longitud, sizeof(record.longitud));
-     *stream.write((char*)&record.altitud, sizeof(record.altitud));
-     *stream.write((char*)&record.Timezone, sizeof(record.Timezone));
-     *stream.write((char*)&record.DST, sizeof(record.DST));
-     *stream.write((char*)&record.TZ_database, sizeof(record.TZ_database));
-     *stream.write((char*)&record.next.position, sizeof(record.next.position));
-     *stream.write((char*)&record.next.file, sizeof(record.next.file));
-     */
     stream << '\n';
     stream << flush;
 
@@ -100,22 +84,6 @@ ostream& operator << (ostream& stream, const Aeropuerto& record) {
 
 istream& operator >> (istream& stream, const Aeropuerto& record) {
     stream.read((char*)&record, sizeof(record));
-    /*
-     *stream.read((char*)&record.id, sizeof(record.id));
-     *stream.read((char*)&record.nombre, sizeof(record.nombre));
-     *stream.read((char*)&record.ciudad, sizeof(record.ciudad));
-     *stream.read((char*)&record.pais, sizeof(record.id));
-     *stream.read((char*)&record.IATA, sizeof(record.IATA));
-     *stream.read((char*)&record.ICAO, sizeof(record.ICAO));
-     *stream.read((char*)&record.latitud, sizeof(record.latitud));
-     *stream.read((char*)&record.longitud, sizeof(record.longitud));
-     *stream.read((char*)&record.altitud, sizeof(record.altitud));
-     *stream.read((char*)&record.Timezone, sizeof(record.Timezone));
-     *stream.read((char*)&record.DST, sizeof(record.DST));
-     *stream.read((char*)&record.TZ_database, sizeof(record.TZ_database));
-     *stream.read((char*)&record.next.position, sizeof(record.next.position));
-     *stream.read((char*)&record.next.file, sizeof(record.next.file));
-     */
     stream.get();
 
     return stream;
