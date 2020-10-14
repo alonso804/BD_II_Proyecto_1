@@ -339,4 +339,4 @@ Para la sección de transacciones, se realizó una transacción simple, la cual 
 * Cada técnicas tiene su propia carpeta, cada una cuenta con su propio Makefile.
 ![](img/Prueba1.png)
 ![](img/Prueba2.png)
-### [Video](https://www.youtube.com/watch?v=noAGPQbdsRI)
+### [Video](https://drive.google.com/drive/folders/1mu3NC7GZM6JLyswnixkePY-Do080-DzQ?usp=sharing)
