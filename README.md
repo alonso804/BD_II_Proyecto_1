@@ -7,6 +7,24 @@
 ## Objetivo
 Conocer las dos diferentes estrucutras de archivos secuenciales, con la diferencia que uno usa indexacion.
 Tener en cuenta las ventajas y desventajas de cada estructura.
+
+## Archivo de datos
+Se hizo uso de una base de datos de un Aeropuerto, lo cual tiene los siguientes atributos:
+- Id
+- Nombre
+- Ciudad,
+- País
+- Aeropuerto 
+- IATA
+- ICAO
+- Latitud 
+- Longitud
+- Altitud
+- Zona horaria
+- DST
+- TZ database
+- Tipo
+
 ## Sequential File
 ### Introducción
 Es la forma más simple de almacenar y recuperar registros de un archivo.
@@ -298,6 +316,9 @@ ObjType ISAM<ObjType, MembType, T, IndexAmount>::search(const T& key) {
     throw new exception;
 }
 ```
+### Transacciones
+Para la sección de transacciones, se realizó una transacción simple, la cual consiste en una busqueda de un valor por el que se va a intercambiar un futuro elemteno de inserción. En caso del Sequential File, la transacción fue satisfactoria, debido a que pudo encontrar el valor anteriormente mencionado, luego agregó el elemento y en otro hilo hizo la búsqueda del nuevo valor. Mientras que en ISAM ocurrió errores, se cree que es por una colisión de funciones
+
 ### Resultado
 #### 1. Inserción
 ![](img/SFI.jpeg)
@@ -305,8 +326,7 @@ ObjType ISAM<ObjType, MembType, T, IndexAmount>::search(const T& key) {
 #### 2. Búsqueda
 ![](img/SFS.jpeg)
 ![](img/ISAMS.jpeg)
-### Métricas
-* 
+
 ### Análisis
 #### 1. Inserción
 * En ambos se busca, pero en inserción actualiza los punteros y no reestructura el archivo (ISAM)
