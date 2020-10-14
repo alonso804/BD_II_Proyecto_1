@@ -10,6 +10,7 @@
 #include<cmath>
 #include<vector>
 #include<algorithm>
+#include<time.h> 
 
 #define RESET   "\033[0m"
 #define RED     "\033[31m"

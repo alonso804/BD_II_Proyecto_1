@@ -22,10 +22,8 @@ El segundo se almacena inmediatamente después.
 - [x] La ventaja más importante de la técnica de organización secuencial de archivos es la capacidad de acceso al siguiente registro rápidamente.
 - [x] No se desperdicia espacio en el dispositivo de almacenamiento.
 * Desventajas 
-- [x] Hay que realizar consultas secuenciales para acceder a un registro.
 - [x] Para insertar nuevos registros, estos tienen que ser al final de todos.
 - [x] Para mantener ordenado y compactado el fichero, hay que crear un fichero nuevo a partir del existente.
-- [x] Si el sistema quiere leer la posición 10 tendrá que recorrer desde el primer archivo.
 ### Procedimiento
 #### 1. Inserción
 Se puede realizar de dos maneras.
@@ -108,14 +106,7 @@ void SequentialFile<ObjType, MembType>::add(ObjType registro) {
     }
 }
 ```
-#### 2. Eliminación
-- Eliminando el total del archivo, se logra dejar libre el espacio del soporte que ocupa.
-- Cuando se borra un archivo, este ya no se puede utilizar y no se puede acceder a ningún registro.
-* Código
-```
-
-```
-#### 3. Búsqueda
+#### 2. Búsqueda
 * Código
 ```
 template <typename ObjType, typename MembType>
@@ -273,11 +264,7 @@ void ISAM<ObjType, MembType, T, IndexAmount>::add(ObjType record) {
     }
 }
 ```
-#### 2. Eliminación.
-```
-
-```
-#### 3. Búsqueda
+#### 2. Búsqueda
 ```
 template<typename ObjType, typename MembType, typename T, size_t IndexAmount>
 ObjType ISAM<ObjType, MembType, T, IndexAmount>::search(const T& key) {
@@ -314,22 +301,26 @@ ObjType ISAM<ObjType, MembType, T, IndexAmount>::search(const T& key) {
 ### Resultado
 #### 1. Inserción
 * Sequential File:
-
+![](img/SFI.jpeg)
 * Indexed Sequential Access Method(ISAM):
-
+![](img/ISAMI.jpeg)
 #### 2. Búsqueda
 * Sequential File:
-
+![](img/SFS.jpeg)
 * Indexed Sequential Access Method(ISAM):
-
-#### Métricas
-#### Análisis 
-#### Comentarios
+![](img/ISAMS.jpeg)
+### Métricas
+* 
+### Análisis
+#### 1. Inserción
+* En ambos se busca, pero en inserción actualiza los punteros y no reestructura el archivo (ISAM)
+#### 2. Búsqueda
+* En uno es log(n) y en el otro también es logaritmo pero depende de la cantidad de páginas, entradas e índices.
+### Comentarios
 * Cada trabajo esta separado por carpetas independientes para usarlo simplemente correr el Makelife, escribir "make".
 * El trabajo se realizo con un live share y por eso solo uno tiene bastantes commits.
-#### Pruebas de uso
+### Pruebas de uso
+* Cada técnicas tiene su propia carpeta, cada una cuenta con su propio Makefile.
+![](img/Prueba1.png)
+![](img/Prueba2.png)
 ### [Video](https://www.youtube.com/watch?v=noAGPQbdsRI)
-
-
-
-

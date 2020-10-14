@@ -1,8 +1,21 @@
 #include"./record/record.h"
 #include"./isam/isam.h"
 #include"./csv/reader.h"
+double get_Time()
+{
+    struct timespec now;
+    clock_gettime(CLOCK_REALTIME, &now);
+    return now.tv_sec + now.tv_nsec*1e-9;
+}
 
 int main(int argc, char const *argv[]) {
+
+    double actualtime;
+    double timespent;
+
+    actualtime = get_Time();
+    timespent = get_Time() - actualtime;
+
     ofstream file("data.dat", ios::binary);
     if(!file.is_open()) {
         cerr << "Error" << endl;
@@ -17,7 +30,7 @@ int main(int argc, char const *argv[]) {
 
     ISAM<Aeropuerto, char(Aeropuerto::*)[6], string, 3> isam("data", &Aeropuerto::id);
     Aeropuerto result;
-
+    /*
     cout << "TEST 1\n";
     for(size_t i = 0; i < 6451; ++i) {
         result = isam.search(data[i][0]);
@@ -55,7 +68,16 @@ int main(int argc, char const *argv[]) {
     result.print();
     result = isam.search("322");
     result.print();
-
+    */
+    int contador = 7000;
+    for(int i=contador;i<=contador+100;++i)
+    {
+        result = isam.search("322");
+    }
+    cout<<endl;
+    printf("Time %.7f\n", timespent);
+    cout<<endl;
+    
     return 0;
 }
 
