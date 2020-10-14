@@ -300,14 +300,10 @@ ObjType ISAM<ObjType, MembType, T, IndexAmount>::search(const T& key) {
 ```
 ### Resultado
 #### 1. Inserción
-* Sequential File:
 ![](img/SFI.jpeg)
-* Indexed Sequential Access Method(ISAM):
 ![](img/ISAMI.jpeg)
 #### 2. Búsqueda
-* Sequential File:
 ![](img/SFS.jpeg)
-* Indexed Sequential Access Method(ISAM):
 ![](img/ISAMS.jpeg)
 ### Métricas
 * 
