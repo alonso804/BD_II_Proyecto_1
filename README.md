@@ -2,7 +2,7 @@
 ## Integrantes
 |  **#** | **Código** | **Apellidos, Nombre** |
 | :---: | :---: | :---: |
-|  1 | 201810010 | Barrios Silva, Alonso Winston |
+|  1 | 201810483 | Barrios Silva, Alonso Winston |
 |  2 | 201810010 | Lazo Pampa, David Alejandro |
 ## Objetivo
 Conocer las dos diferentes estrucutras de archivos secuenciales, con la diferencia que uno usa indexacion.
