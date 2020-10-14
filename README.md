@@ -12,7 +12,7 @@ Tener en cuenta las ventajas y desventajas de cada estructura.
 Se hizo uso de una base de datos de un Aeropuerto, lo cual tiene los siguientes atributos:
 - Id
 - Nombre
-- Ciudad,
+- Ciudad
 - País
 - Aeropuerto 
 - IATA
