@@ -5,7 +5,7 @@
 
 vector<vector<string>> read_record() { 
 	fstream fin;
-    fin.open("./data/Aeropuerto.csv", ios::in); 
+    fin.open("./../data/Aeropuerto.csv", ios::in); 
 
     if(fin.is_open()) {
         vector<vector<string>> data;

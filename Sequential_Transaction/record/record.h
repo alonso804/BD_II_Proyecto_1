@@ -1,6 +1,7 @@
 #ifndef Record_H
 #define Record_H
 
+#include"../header.h"
 #include"./next.h"
 
 struct Aeropuerto {

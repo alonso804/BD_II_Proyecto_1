@@ -1,7 +1,7 @@
 #ifndef Next_H
 #define Next_H
 
-#include"../../header.h"
+#include"../header.h"
 
 struct Next {
     long int position;

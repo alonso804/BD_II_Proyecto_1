@@ -1,0 +1,16 @@
+#ifndef Header_H
+#define Header_H
+
+#include<iostream>
+#include<string>
+#include<cstring>
+#include<sstream>
+#include<typeinfo>
+#include<algorithm>
+#include<vector>
+#include<thread>
+#include<fstream>
+
+using namespace std;
+
+#endif //Header_H

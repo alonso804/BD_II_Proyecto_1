@@ -1,7 +1,7 @@
 #ifndef Binary_Search_H
 #define Binary_Search_H
 
-#include"../../header.h"
+#include"../header.h"
 #include"../record/record.h"
 
 template <typename ObjType, typename MembType, typename T>
